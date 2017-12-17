@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -15,11 +16,17 @@ import java.util.ArrayList;
 
 public class EditTextArrayAddapter extends BaseAdapter{
 
+    public static final String KEY_WORD = "word";
+    public static final String KEY_PLAYER = "player";
+
+    private String type;
     private LayoutInflater mInflater;
+
     public ArrayList<String> players = new ArrayList<>();
 
-    public EditTextArrayAddapter(Context context, ArrayList<String> players) {
+    public EditTextArrayAddapter(Context context, ArrayList<String> players, String type) {
         this.players = players;
+        this.type = type;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         notifyDataSetChanged();
     }
@@ -42,9 +49,30 @@ public class EditTextArrayAddapter extends BaseAdapter{
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.player_list_item, null);
+            if(type == KEY_PLAYER){
+
+                convertView = mInflater.inflate(R.layout.player_list_item, null);
+                Button deleteButton = convertView.findViewById(R.id.btn_delete);
+
+                if(players.size() > 2){
+                    deleteButton.setVisibility(View.VISIBLE);
+                    notifyDataSetChanged();
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
+                }
+
+
+            }else{
+                convertView = mInflater.inflate(R.layout.word_list_item, null);
+            }
+
             holder.caption = (EditText) convertView
                     .findViewById(R.id.et_name);
             convertView.setTag(holder);

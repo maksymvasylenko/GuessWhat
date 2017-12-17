@@ -26,9 +26,8 @@ public class SetWordsFragment extends Fragment {
         final Fragment scoreFragment = new ScoreFragment();
 
         Button next = view.findViewById(R.id.btn_next);
-        Button addWord = view.findViewById(R.id.btn_add_player);
 
-        final EditTextArrayAddapter wordsAdapter = new EditTextArrayAddapter(getContext(), dataProvider.getWords());
+        final EditTextArrayAddapter wordsAdapter = new EditTextArrayAddapter(getContext(), dataProvider.getWords(), EditTextArrayAddapter.KEY_WORD);
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(wordsAdapter);
 

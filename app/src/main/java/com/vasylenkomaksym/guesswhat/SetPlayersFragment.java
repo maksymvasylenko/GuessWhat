@@ -42,7 +42,7 @@ public class SetPlayersFragment extends Fragment {
         dataProvider.addPoint(0);
 
 
-        final EditTextArrayAddapter playersAdapter = new EditTextArrayAddapter(getContext(), dataProvider.getPlayers());
+        final EditTextArrayAddapter playersAdapter = new EditTextArrayAddapter(getContext(), dataProvider.getPlayers(), EditTextArrayAddapter.KEY_PLAYER);
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(playersAdapter);
 

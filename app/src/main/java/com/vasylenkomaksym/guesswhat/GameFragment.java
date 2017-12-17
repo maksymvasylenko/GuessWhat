@@ -82,7 +82,7 @@ public class GameFragment extends Fragment{
         });
 
 
-        countDownTimer = new CountDownTimer(10000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 countDownTextView.setText(millisUntilFinished / 1000 + " sec");
