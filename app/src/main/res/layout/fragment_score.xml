@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ListView
+        android:id="@+id/lv_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_round"
+        android:layout_alignParentTop="true">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/tv_round"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_players_turn"
+        android:gravity="center"
+        android:text="Round 0"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv_players_turn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_go"
+        android:gravity="center"
+        android:text="player to go"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_go"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="GO" />
+
+</RelativeLayout>
