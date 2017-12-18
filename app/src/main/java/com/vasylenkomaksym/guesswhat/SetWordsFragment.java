@@ -57,31 +57,6 @@ public class SetWordsFragment extends Fragment {
                 dataProvider.addArrayOfWords(wordsOfPlayer);
 
 
-
-                for (int i = 0; i < wordsAdapter.getCount(); i++) {
-
-                    Log.e("adapter item word:" + i, String.valueOf(wordsAdapter.getPlayer(i)));
-                }
-
-
-                for (int i = 0; i < dataProvider.getWordsPerPlayer(); i++) {
-                    wordsOfPlayer.set(i, "");
-                }
-                wordsOfPlayer.set(1, "fuck yeah");
-
-                wordsAdapter.swapItems(wordsOfPlayer);
-                wordsAdapter.notifyDataSetChanged();
-
-                for (int i = 0; i < wordsOfPlayer.size(); i++) {
-
-                    Log.e("adapter item word3:" + i,"aaa " +  wordsOfPlayer.get(i));
-                }
-
-                for (int i = 0; i < wordsAdapter.getCount(); i++) {
-
-                    Log.e("adapter item word2:" + i, String.valueOf(wordsAdapter.getPlayer(i)));
-                }
-
                 counter++;
                 if(counter >= dataProvider.getPlayers().size()){
                     for (int i = 0; i < dataProvider.getWords().size(); i++) {
@@ -92,11 +67,12 @@ public class SetWordsFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
                 }else{
+                    final Fragment setWordsFragment = new SetWordsFragment();
 
-                    playerName.setText(dataProvider.getPlayer(counter));
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, setWordsFragment).addToBackStack(null).commit();
                 }
 
-                Log.e("adapter item check", String.valueOf(wordsAdapter.getPlayer(1)));
             }
         });
 
