@@ -94,6 +94,9 @@ public class EditTextArrayAddapter extends BaseAdapter{
                         notifyDataSetChanged();
                     }
                 });
+            }else{
+                holder.deleteBtn.setVisibility(View.GONE);
+                notifyDataSetChanged();
             }
         }
 
