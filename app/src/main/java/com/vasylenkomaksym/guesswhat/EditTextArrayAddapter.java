@@ -1,6 +1,7 @@
 package com.vasylenkomaksym.guesswhat;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,27 +51,20 @@ public class EditTextArrayAddapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
 
+
+        int pos = position;
+
+        Log.e("position", " start");
+
+        Log.e("position", "" + pos);
+
         if (convertView == null) {
+
             holder = new ViewHolder();
             if(type == KEY_PLAYER){
 
                 convertView = mInflater.inflate(R.layout.player_list_item, null);
-                Button deleteButton = convertView.findViewById(R.id.btn_delete);
-                deleteButton.setId(position);
-
-                if(players.size() > 2){
-
-                    deleteButton.setVisibility(View.VISIBLE);
-                    notifyDataSetChanged();
-                    deleteButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            players.remove(view.getId());
-                            notifyDataSetChanged();
-                        }
-                    });
-                }
-
+                holder.deleteBtn = convertView.findViewById(R.id.btn_delete);
 
             }else{
                 convertView = mInflater.inflate(R.layout.word_list_item, null);
@@ -80,11 +74,29 @@ public class EditTextArrayAddapter extends BaseAdapter{
                     .findViewById(R.id.et_name);
             convertView.setTag(holder);
         } else {
+            Log.e("position else", "" + pos);
             holder = (ViewHolder) convertView.getTag();
         }
         //Fill EditText with the value you have in data source
         holder.caption.setText(players.get(position));
         holder.caption.setId(position);
+
+        if(type == KEY_PLAYER) {
+            if(players.size() > 2){
+
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
+
+                holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        players.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+        }
+
 
         //we need to update adapter once we finish with editing
         holder.caption.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -100,13 +112,9 @@ public class EditTextArrayAddapter extends BaseAdapter{
         return convertView;
     }
 
-    public void swapItems(ArrayList<String> players) {
-        this.players = players;
-        notifyDataSetChanged();
-    }
-
 }
 
 class ViewHolder {
     EditText caption;
+    Button deleteBtn;
 }
