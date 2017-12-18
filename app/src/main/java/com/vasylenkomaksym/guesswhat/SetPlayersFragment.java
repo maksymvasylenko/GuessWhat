@@ -72,9 +72,7 @@ public class SetPlayersFragment extends Fragment {
 
 
                 int wordsCount = Integer.valueOf(String.valueOf(numberOfWords.getText()));
-                for (int i = 0; i < wordsCount; i++) {
-                    dataProvider.addWord("");
-                }
+                dataProvider.setWordsPerPlayer(wordsCount);
 
 
                 getActivity().getSupportFragmentManager().beginTransaction()

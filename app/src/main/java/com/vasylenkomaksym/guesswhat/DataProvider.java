@@ -20,6 +20,7 @@ public class DataProvider {
     private int round = 0;
     private int turn = 0;
     private boolean isNewRound = true;
+    private int wordsPerPlayer = 0;
 
     private static DataProvider instance = null;
 
@@ -32,6 +33,14 @@ public class DataProvider {
             instance = new DataProvider();
         }
         return instance;
+    }
+
+    public void setWordsPerPlayer(int wordsPerPlayer) {
+        this.wordsPerPlayer = wordsPerPlayer;
+    }
+
+    public int getWordsPerPlayer() {
+        return wordsPerPlayer;
     }
 
     public ArrayList<String> getWords() {
