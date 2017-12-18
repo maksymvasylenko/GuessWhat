@@ -47,7 +47,7 @@ public class EditTextArrayAddapter extends BaseAdapter{
         return players.get(position);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
 
         if (convertView == null) {
@@ -56,14 +56,17 @@ public class EditTextArrayAddapter extends BaseAdapter{
 
                 convertView = mInflater.inflate(R.layout.player_list_item, null);
                 Button deleteButton = convertView.findViewById(R.id.btn_delete);
+                deleteButton.setId(position);
 
                 if(players.size() > 2){
+
                     deleteButton.setVisibility(View.VISIBLE);
                     notifyDataSetChanged();
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            players.remove(view.getId());
+                            notifyDataSetChanged();
                         }
                     });
                 }
@@ -96,6 +99,12 @@ public class EditTextArrayAddapter extends BaseAdapter{
 
         return convertView;
     }
+
+    public void swapItems(ArrayList<String> players) {
+        this.players = players;
+        notifyDataSetChanged();
+    }
+
 }
 
 class ViewHolder {
