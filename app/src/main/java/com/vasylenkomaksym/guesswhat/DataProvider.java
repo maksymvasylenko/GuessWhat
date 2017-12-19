@@ -111,8 +111,6 @@ public class DataProvider {
     public void nextTurn() {
         if(this.turn == (this.players.size() - 1)){
             this.turn = 0;
-            this.round++;
-            this.isNewRound = true;
         }else{
             this.turn++;
         }
