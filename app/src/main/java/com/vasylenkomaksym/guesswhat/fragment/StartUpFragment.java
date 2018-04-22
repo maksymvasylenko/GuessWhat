@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.vasylenkomaksym.guesswhat.R;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 /**
  * Created by Maks on 14.12.2017.
@@ -24,6 +25,8 @@ public class StartUpFragment extends Fragment {
         final Fragment setPlayerFragment = new SetPlayersFragment();
 
         Button newGameButton = view.findViewById(R.id.btn_new_game);
+
+        DataProvider.getNewInstance();
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override

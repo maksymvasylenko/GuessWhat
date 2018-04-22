@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.DataProvider;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -52,10 +52,8 @@ public class GameFragment extends Fragment {
             public void onClick(View view) {
                 dataProvider.moveFromAvailableToSkipped(currentWordId);
 
-                Log.e("just ", "skipped");
                 logDataProvider();
                 nextWord();
-                Log.e("just ", "skipped 2");
                 logDataProvider();
             }
         });

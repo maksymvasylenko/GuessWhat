@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.StartUpFragment;
+import com.vasylenkomaksym.guesswhat.fragment.StartUpFragment;
 
 public class MainActivity extends AppCompatActivity {
 

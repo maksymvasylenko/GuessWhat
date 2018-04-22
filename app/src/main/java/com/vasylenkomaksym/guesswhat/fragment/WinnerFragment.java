@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.DataProvider;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.SetPlayersFragment;
+import com.vasylenkomaksym.guesswhat.fragment.SetPlayersFragment;
 import com.vasylenkomaksym.guesswhat.adapter.PlayerAdapter;
 
 /**
