@@ -1,4 +1,4 @@
-package com.vasylenkomaksym.guesswhat;
+package com.vasylenkomaksym.guesswhat.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAddapter;
+import com.vasylenkomaksym.guesswhat.R;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 import java.util.ArrayList;

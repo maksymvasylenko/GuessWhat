@@ -36,7 +36,7 @@ public class ScoreFragment extends Fragment {
         }
 
 
-        final Fragment gameFragment = new GameFragment();
+        final GameFragment gameFragment = new GameFragment();
 
         Button next = view.findViewById(R.id.btn_go);
 

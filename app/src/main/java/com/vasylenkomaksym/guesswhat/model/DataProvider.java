@@ -1,7 +1,6 @@
-package com.vasylenkomaksym.guesswhat;
+package com.vasylenkomaksym.guesswhat.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by Maks on 10.12.2017.

@@ -7,7 +7,10 @@
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:lines="1"
+        android:maxLines="1"
         android:text="word"
+        android:singleLine="true"
         android:textSize="30sp" />
 
 </LinearLayout>

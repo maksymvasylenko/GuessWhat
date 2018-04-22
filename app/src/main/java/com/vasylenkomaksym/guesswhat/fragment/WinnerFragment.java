@@ -48,7 +48,7 @@ public class WinnerFragment extends Fragment{
             public void onClick(View view) {
 
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, setPlayersFragment).addToBackStack(null).commit();
+                        .replace(R.id.fragment_container, setPlayersFragment).commit();
             }
         });
 

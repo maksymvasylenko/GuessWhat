@@ -1,4 +1,4 @@
-package com.vasylenkomaksym.guesswhat;
+package com.vasylenkomaksym.guesswhat.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAddapter;
+import com.vasylenkomaksym.guesswhat.R;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 /**
@@ -35,12 +37,15 @@ public class SetPlayersFragment extends Fragment {
         Button addPlayer = view.findViewById(R.id.btn_add_player);
         final EditText numberOfWords = view.findViewById(R.id.et_number_of_words);
 
-        dataProvider.addPlayer("Player 1");
-        dataProvider.addPlayer("Player 2");
+        if(dataProvider.getPlayers().size() == 0){
+            dataProvider.addPlayer("Player 1");
+            dataProvider.addPlayer("Player 2");
+
+            dataProvider.addPoint(0);
+            dataProvider.addPoint(0);
+        }
 
 
-        dataProvider.addPoint(0);
-        dataProvider.addPoint(0);
 
 
         final EditTextArrayAddapter playersAdapter = new EditTextArrayAddapter(getContext(), dataProvider.getPlayers(), EditTextArrayAddapter.KEY_PLAYER);
