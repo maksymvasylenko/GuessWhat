@@ -1,4 +1,4 @@
-package com.vasylenkomaksym.guesswhat;
+package com.vasylenkomaksym.guesswhat.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.vasylenkomaksym.guesswhat.R;
 
 import java.util.ArrayList;
 
