@@ -1,9 +1,8 @@
 package com.vasylenkomaksym.guesswhat.fragment;
 
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.vasylenkomaksym.guesswhat.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -20,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Maks on 16.12.2017.
  */
 
-public class GameFragment extends Fragment{
+public class GameFragment extends Fragment {
 
     private TextView currentWordTextView, countDownTextView;
     private DataProvider dataProvider = null;
@@ -29,9 +28,8 @@ public class GameFragment extends Fragment{
     private int eearnedPoints = 0;
     private CountDownTimer countDownTimer;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         final Fragment scoreFragment = new ScoreFragment();

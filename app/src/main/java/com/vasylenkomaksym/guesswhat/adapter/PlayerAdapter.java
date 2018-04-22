@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.vasylenkomaksym.guesswhat.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 /**
  * Created by Maks on 16.12.2017.
  */
 
-public class PlayerAddapter extends ArrayAdapter<String> {
+public class PlayerAdapter extends ArrayAdapter<String> {
 
     DataProvider dataProvider = null;
 
-    public PlayerAddapter(Context context) {
+    public PlayerAdapter(Context context) {
         super(context, 0, DataProvider.getInstance().getPlayers());
         dataProvider = DataProvider.getInstance();
     }

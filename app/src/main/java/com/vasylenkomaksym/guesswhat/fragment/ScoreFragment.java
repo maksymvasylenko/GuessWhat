@@ -1,8 +1,8 @@
 package com.vasylenkomaksym.guesswhat.fragment;
 
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.adapter.PlayerAddapter;
+import com.vasylenkomaksym.guesswhat.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.model.DataProvider;
+import com.vasylenkomaksym.guesswhat.adapter.PlayerAdapter;
 
 /**
  * Created by Maks on 14.12.2017.
@@ -40,7 +40,7 @@ public class ScoreFragment extends Fragment {
 
         Button next = view.findViewById(R.id.btn_go);
 
-        final PlayerAddapter scoreAdapter = new PlayerAddapter(getContext());
+        final PlayerAdapter scoreAdapter = new PlayerAdapter(getContext());
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(scoreAdapter);
 
