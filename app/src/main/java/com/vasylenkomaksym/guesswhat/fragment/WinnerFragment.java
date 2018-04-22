@@ -10,9 +10,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.adapter.PlayerAddapter;
+import com.vasylenkomaksym.guesswhat.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.model.DataProvider;
+import com.vasylenkomaksym.guesswhat.SetPlayersFragment;
+import com.vasylenkomaksym.guesswhat.adapter.PlayerAdapter;
 
 /**
  * Created by Maks on 17.12.2017.
@@ -38,7 +39,7 @@ public class WinnerFragment extends Fragment{
 
         Button restart = view.findViewById(R.id.btn_restart);
 
-        final PlayerAddapter scoreAdapter = new PlayerAddapter(getContext());
+        final PlayerAdapter scoreAdapter = new PlayerAdapter(getContext());
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(scoreAdapter);
 

@@ -1,12 +1,12 @@
 package com.vasylenkomaksym.guesswhat.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.vasylenkomaksym.guesswhat.R;
-import com.vasylenkomaksym.guesswhat.fragment.StartUpFragment;
+import com.vasylenkomaksym.guesswhat.StartUpFragment;
 
 public class MainActivity extends AppCompatActivity {
 
