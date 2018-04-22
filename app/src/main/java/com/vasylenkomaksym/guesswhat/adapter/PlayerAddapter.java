@@ -1,4 +1,4 @@
-package com.vasylenkomaksym.guesswhat;
+package com.vasylenkomaksym.guesswhat.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.vasylenkomaksym.guesswhat.R;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 /**
  * Created by Maks on 16.12.2017.

@@ -1,4 +1,4 @@
-package com.vasylenkomaksym.guesswhat;
+package com.vasylenkomaksym.guesswhat.fragment;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.vasylenkomaksym.guesswhat.R;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 import java.util.concurrent.ThreadLocalRandom;
 

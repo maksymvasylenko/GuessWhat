@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 import java.util.ArrayList;
 
