@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Maks on 14.12.2017.
  */
 
-public class EditTextArrayAddapter extends BaseAdapter{
+public class EditTextArrayAdapter extends BaseAdapter{
 
     public static final String KEY_WORD = "word";
     public static final String KEY_PLAYER = "player";
@@ -27,7 +27,7 @@ public class EditTextArrayAddapter extends BaseAdapter{
 
     public ArrayList<String> players = new ArrayList<>();
 
-    public EditTextArrayAddapter(Context context, ArrayList<String> players, String type) {
+    public EditTextArrayAdapter(Context context, ArrayList<String> players, String type) {
         this.players = players;
         this.type = type;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

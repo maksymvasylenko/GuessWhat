@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.DataProvider;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 import com.vasylenkomaksym.guesswhat.R;
 
 import java.util.concurrent.ThreadLocalRandom;

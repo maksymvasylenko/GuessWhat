@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAddapter;
+import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAdapter;
 import com.vasylenkomaksym.guesswhat.R;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
@@ -48,7 +48,7 @@ public class SetPlayersFragment extends Fragment {
 
 
 
-        final EditTextArrayAddapter playersAdapter = new EditTextArrayAddapter(getContext(), dataProvider.getPlayers(), EditTextArrayAddapter.KEY_PLAYER);
+        final EditTextArrayAdapter playersAdapter = new EditTextArrayAdapter(getContext(), dataProvider.getPlayers(), EditTextArrayAdapter.KEY_PLAYER);
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(playersAdapter);
 
