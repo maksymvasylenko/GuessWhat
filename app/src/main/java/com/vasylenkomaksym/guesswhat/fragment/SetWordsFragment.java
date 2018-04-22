@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAddapter;
+import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAdapter;
 import com.vasylenkomaksym.guesswhat.R;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
@@ -26,7 +26,7 @@ public class SetWordsFragment extends Fragment {
     private DataProvider dataProvider = null;
     private static int counter = 0;
     private ArrayList<String> wordsOfPlayer = new ArrayList<>();
-    private EditTextArrayAddapter wordsAdapter;
+    private EditTextArrayAdapter wordsAdapter;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_set_words, container, false);
@@ -48,7 +48,7 @@ public class SetWordsFragment extends Fragment {
 
         Button next = view.findViewById(R.id.btn_next);
 
-        wordsAdapter = new EditTextArrayAddapter(getContext(), wordsOfPlayer, EditTextArrayAddapter.KEY_WORD);
+        wordsAdapter = new EditTextArrayAdapter(getContext(), wordsOfPlayer, EditTextArrayAdapter.KEY_WORD);
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(wordsAdapter);
 
