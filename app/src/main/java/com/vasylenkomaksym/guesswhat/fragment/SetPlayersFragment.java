@@ -60,6 +60,7 @@ public class SetPlayersFragment extends Fragment {
                 dataProvider.addPoint(0);
 
                 playersAdapter.notifyDataSetChanged();
+                listView.smoothScrollToPosition(listView.getCount()-1);
             }
         });
 

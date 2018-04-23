@@ -25,7 +25,7 @@ public class EditTextArrayAdapter extends BaseAdapter{
     private String type;
     private LayoutInflater mInflater;
 
-    public ArrayList<String> players = new ArrayList<>();
+    public ArrayList<String> players;
 
     public EditTextArrayAdapter(Context context, ArrayList<String> players, String type) {
         this.players = players;
