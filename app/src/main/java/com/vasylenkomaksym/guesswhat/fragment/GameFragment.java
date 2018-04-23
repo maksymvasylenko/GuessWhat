@@ -53,7 +53,6 @@ public class GameFragment extends Fragment {
         cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
 
         testData = new ArrayList<>();
-//        testData.add("word");
 
         adapter = new SwipeDeckAdapter(testData, this.getContext());
         if(cardStack != null){
@@ -189,7 +188,7 @@ public class GameFragment extends Fragment {
 
             return true;
         }else{
-            currentWordTextView.setText("DONE!!");
+            //currentWordTextView.setText("DONE!!");
             return false;
         }
     }
