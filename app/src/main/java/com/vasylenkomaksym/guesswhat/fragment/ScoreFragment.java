@@ -28,6 +28,7 @@ public class ScoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
         dataProvider = DataProvider.getInstance();
+        dataProvider.writeIntoFile(getContext());
 
         if(dataProvider.getRound() >= 3){
             Fragment winnerFragment = new WinnerFragment();

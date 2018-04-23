@@ -33,6 +33,8 @@ public class SetWordsFragment extends Fragment {
 
         final Fragment scoreFragment = new ScoreFragment();
 
+        Log.e("SetWords", "seting words started");
+
         wordsOfPlayer.clear();
         for (int i = 0; i < dataProvider.getWordsPerPlayer(); i++) {
             wordsOfPlayer.add("");

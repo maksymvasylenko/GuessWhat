@@ -14,6 +14,8 @@ import com.vasylenkomaksym.guesswhat.R;
 import com.vasylenkomaksym.guesswhat.adapter.PlayerAdapter;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
+import java.io.File;
+
 /**
  * Created by Maks on 17.12.2017.
  */
@@ -27,6 +29,9 @@ public class WinnerFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_winner, container, false);
 
+
+        File file = new File(getContext().getFilesDir(),DataProvider.FILE_NAME);
+        file.delete();
 
         dataProvider = DataProvider.getInstance();
 
