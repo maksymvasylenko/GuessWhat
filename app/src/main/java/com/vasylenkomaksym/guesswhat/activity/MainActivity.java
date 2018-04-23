@@ -10,8 +10,6 @@ import com.vasylenkomaksym.guesswhat.fragment.StartUpFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +20,5 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment startUpFragment = new StartUpFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, startUpFragment).commit();
-
     }
-
-
 }
