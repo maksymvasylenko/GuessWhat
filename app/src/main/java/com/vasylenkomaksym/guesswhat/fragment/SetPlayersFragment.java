@@ -58,6 +58,7 @@ public class SetPlayersFragment extends Fragment {
                 dataProvider.addPlayer("Player " + (dataProvider.getPlayers().size() + 1));
                 dataProvider.addPoint(0);
                 playersAdapter.notifyDataSetChanged();
+                listView.smoothScrollToPosition(listView.getCount()-1);
             }
         });
 
