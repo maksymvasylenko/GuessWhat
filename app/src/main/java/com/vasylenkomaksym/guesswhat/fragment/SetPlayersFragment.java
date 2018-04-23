@@ -11,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAdapter;
+//import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAdapter;
 import com.vasylenkomaksym.guesswhat.R;
+import com.vasylenkomaksym.guesswhat.adapter.EditPlayerAdapter;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 /**
@@ -46,9 +47,7 @@ public class SetPlayersFragment extends Fragment {
         }
 
 
-
-
-        final EditTextArrayAdapter playersAdapter = new EditTextArrayAdapter(getContext(), dataProvider.getPlayers(), EditTextArrayAdapter.KEY_PLAYER);
+        final EditPlayerAdapter playersAdapter = new EditPlayerAdapter(getContext(), dataProvider.getPlayers());
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(playersAdapter);
 
@@ -58,7 +57,6 @@ public class SetPlayersFragment extends Fragment {
             public void onClick(View view) {
                 dataProvider.addPlayer("Player " + (dataProvider.getPlayers().size() + 1));
                 dataProvider.addPoint(0);
-
                 playersAdapter.notifyDataSetChanged();
             }
         });
@@ -68,14 +66,13 @@ public class SetPlayersFragment extends Fragment {
             public void onClick(View view) {
 
                 for (int i = 0; i < playersAdapter.getCount(); i++) {
-                    //Log.e("adapter item " + i, String.valueOf(playersAdapter.getPlayer(i)));
-                    //dataProvider.addPlayer(String.valueOf(playersAdapter.getPlayer(i)));
+                    //Log.e("adapter item " + i, String.valueOf(playersAdapter.getData(i)));
+                    //dataProvider.addPlayer(String.valueOf(playersAdapter.getData(i)));
                 }
 
                 for (int i = 0; i < dataProvider.getPlayers().size(); i++) {
                     Log.e("adapter item " + i, dataProvider.getPlayer(i));
                 }
-
 
                 int wordsCount = Integer.valueOf(String.valueOf(numberOfWords.getText()));
                 dataProvider.setWordsPerPlayer(wordsCount);

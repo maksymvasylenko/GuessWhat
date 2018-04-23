@@ -11,22 +11,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.adapter.EditTextArrayAdapter;
 import com.vasylenkomaksym.guesswhat.R;
+import com.vasylenkomaksym.guesswhat.adapter.EditWordsAdapter;
 import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
 import java.util.ArrayList;
-
-/**
- * Created by Maks on 14.12.2017.
- */
 
 public class SetWordsFragment extends Fragment {
 
     private DataProvider dataProvider = null;
     private static int counter = 0;
     private ArrayList<String> wordsOfPlayer = new ArrayList<>();
-    private EditTextArrayAdapter wordsAdapter;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_set_words, container, false);
@@ -38,17 +33,14 @@ public class SetWordsFragment extends Fragment {
 
         final Fragment scoreFragment = new ScoreFragment();
 
-
         wordsOfPlayer.clear();
         for (int i = 0; i < dataProvider.getWordsPerPlayer(); i++) {
             wordsOfPlayer.add("");
         }
 
-
-
         Button next = view.findViewById(R.id.btn_next);
 
-        wordsAdapter = new EditTextArrayAdapter(getContext(), wordsOfPlayer, EditTextArrayAdapter.KEY_WORD);
+        EditWordsAdapter wordsAdapter = new EditWordsAdapter(getContext(), wordsOfPlayer);
         final ListView listView = view.findViewById(R.id.lv_player);
         listView.setAdapter(wordsAdapter);
 
@@ -57,7 +49,6 @@ public class SetWordsFragment extends Fragment {
             public void onClick(View view) {
 
                 dataProvider.addArrayOfWords(wordsOfPlayer);
-
 
                 counter++;
                 if(counter >= dataProvider.getPlayers().size()){

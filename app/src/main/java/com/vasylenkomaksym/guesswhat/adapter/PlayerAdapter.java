@@ -20,7 +20,7 @@ public class PlayerAdapter extends ArrayAdapter<String> {
     /* Set up singleton model */
     DataProvider dataProvider = null;
 
-    /* Set up adapter, passing singleton instance with players */
+    /* Set up adapter, passing singleton instance with data */
     public PlayerAdapter(Context context) {
         super(context, 0, DataProvider.getInstance().getPlayers());
         dataProvider = DataProvider.getInstance();
