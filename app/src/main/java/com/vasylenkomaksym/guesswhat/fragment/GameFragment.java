@@ -172,26 +172,15 @@ public class GameFragment extends Fragment {
            size = dataProvider.getAvailableWords().size();
         }
 
-        if(size != 0){
+        if(size > 0){
             int i = ThreadLocalRandom.current().nextInt(dataProvider.getAvailableWords().size());
             currentWordId = dataProvider.getAvailableWords().get(i);
             String newWord = dataProvider.getWord(currentWordId);
-
-//            currentWordTextView.setText(newWord);
-
-//            /*
-//            experimental
-//             */
             addWord(newWord);
-//            /*
-//            experimental
-//             */
-
             return true;
-        }else{
-            currentWordTextView.setText("DONE!!");
-            return false;
         }
+
+        return false;
     }
 
     private void logDataProvider(){
