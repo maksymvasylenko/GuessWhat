@@ -1,18 +1,20 @@
 package com.vasylenkomaksym.guesswhat.fragment;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.vasylenkomaksym.guesswhat.model.DataProvider;
+import com.daprlabs.aaron.swipedeck.SwipeDeck;
 import com.vasylenkomaksym.guesswhat.R;
+import com.vasylenkomaksym.guesswhat.adapter.SwipeDeckAdapter;
+import com.vasylenkomaksym.guesswhat.model.DataProvider;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -28,44 +30,54 @@ public class GameFragment extends Fragment {
     private int eearnedPoints = 0;
     private CountDownTimer countDownTimer;
 
+    /*
+    Swipe deck
+     */
+    private SwipeDeck cardStack;
+    private ArrayList<String> testData;
+    private SwipeDeckAdapter adapter;
+    /*
+    Swipe deck
+     */
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         final Fragment scoreFragment = new ScoreFragment();
 
-        currentWordTextView = view.findViewById(R.id.tv_word);
-        countDownTextView = view.findViewById(R.id.tv_count_down);
-        dataProvider = DataProvider.getInstance();
-        logDataProvider();
-        currentPlayerId = dataProvider.getTurn();
+        /*
+        Swipe deck
+         */
+        cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
 
-        Button skipButton = view.findViewById(R.id.btn_skip);
-        Button guessedButton = view.findViewById(R.id.btn_guessed);
+        testData = new ArrayList<>();
+//        testData.add("word");
 
+        adapter = new SwipeDeckAdapter(testData, this.getContext());
+        if(cardStack != null){
+            cardStack.setAdapter(adapter);
+        }
 
-        nextWord();
-
-
-        skipButton.setOnClickListener(new View.OnClickListener() {
+        cardStack.setCallback(new SwipeDeck.SwipeDeckCallback() {
             @Override
-            public void onClick(View view) {
+            public void cardSwipedLeft(long stableId) {
+                Log.i("MainActivity", "card was swiped left, position in adapter: " + stableId);
+                // TODO: 4/23/18 implement this
+//                addWord("wtf");
                 dataProvider.moveFromAvailableToSkipped(currentWordId);
-
-                logDataProvider();
                 nextWord();
-                logDataProvider();
             }
-        });
 
-        guessedButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void cardSwipedRight(long stableId) {
+                Log.i("MainActivity", "card was swiped right, position in adapter: " + stableId);
+                // TODO: 4/23/18 implement this
+//                addWord("wtffff");
+
                 dataProvider.removeFromAvailable(currentWordId);
                 eearnedPoints++;
-
-                Log.e("just ", "guessed");
-                logDataProvider();
 
                 if(!nextWord()){
 
@@ -79,6 +91,54 @@ public class GameFragment extends Fragment {
             }
         });
 
+        cardStack.setLeftImage(R.id.left_image);
+        cardStack.setRightImage(R.id.right_image);
+        /*
+        End swipe deck
+         */
+
+//        currentWordTextView = view.findViewById(R.id.tv_word);
+        countDownTextView = view.findViewById(R.id.tv_count_down);
+        dataProvider = DataProvider.getInstance();
+        logDataProvider();
+        currentPlayerId = dataProvider.getTurn();
+
+//        Button skipButton = view.findViewById(R.id.btn_skip);
+//        Button guessedButton = view.findViewById(R.id.btn_guessed);
+
+        nextWord();
+
+//        skipButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dataProvider.moveFromAvailableToSkipped(currentWordId);
+//
+//                logDataProvider();
+//                nextWord();
+//                logDataProvider();
+//            }
+//        });
+
+//        guessedButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dataProvider.removeFromAvailable(currentWordId);
+//                eearnedPoints++;
+//
+//                Log.e("just ", "guessed");
+//                logDataProvider();
+//
+//                if(!nextWord()){
+//
+//                    dataProvider.addPoints(currentPlayerId, eearnedPoints);
+//                    dataProvider.nextRound();
+//                    countDownTimer.cancel();
+//                    getActivity().getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
+//
+//                }
+//            }
+//        });
 
         countDownTimer = new CountDownTimer(60000, 1000) {
 
@@ -87,15 +147,20 @@ public class GameFragment extends Fragment {
             }
 
             public void onFinish() {
-                dataProvider.addPoints(currentPlayerId, eearnedPoints);
-                dataProvider.nextTurn();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
+//                dataProvider.addPoints(currentPlayerId, eearnedPoints);
+//                dataProvider.nextTurn();
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
             }
         }.start();
 
-
         return view;
+    }
+
+    private void addWord(String word){
+        adapter.addItem(word);
+        Log.d("hm", word + " added");
+//        cardStack.unSwipeCard();
     }
 
     private boolean nextWord(){
@@ -112,7 +177,16 @@ public class GameFragment extends Fragment {
             currentWordId = dataProvider.getAvailableWords().get(i);
             String newWord = dataProvider.getWord(currentWordId);
 
-            currentWordTextView.setText(newWord);
+//            currentWordTextView.setText(newWord);
+
+//            /*
+//            experimental
+//             */
+            addWord(newWord);
+//            /*
+//            experimental
+//             */
+
             return true;
         }else{
             currentWordTextView.setText("DONE!!");
