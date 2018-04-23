@@ -34,6 +34,11 @@ public class DataProvider {
         return instance;
     }
 
+    public static DataProvider getNewInstance(){
+        instance = new DataProvider();
+        return instance;
+    }
+
     public void setWordsPerPlayer(int wordsPerPlayer) {
         this.wordsPerPlayer = wordsPerPlayer;
     }
@@ -117,7 +122,7 @@ public class DataProvider {
 
     public void nextRound() {
         this.round++;
-        this.turn = 0;
+        //this.turn = 0;
         this.isNewRound = true;
     }
 
@@ -183,6 +188,5 @@ public class DataProvider {
 
         return this.players.get(biggestId);
     }
-
 
 }

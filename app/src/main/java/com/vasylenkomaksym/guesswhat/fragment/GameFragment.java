@@ -52,10 +52,8 @@ public class GameFragment extends Fragment {
             public void onClick(View view) {
                 dataProvider.moveFromAvailableToSkipped(currentWordId);
 
-                Log.e("just ", "skipped");
                 logDataProvider();
                 nextWord();
-                Log.e("just ", "skipped 2");
                 logDataProvider();
             }
         });
