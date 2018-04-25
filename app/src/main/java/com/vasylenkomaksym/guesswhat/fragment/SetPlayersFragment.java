@@ -3,7 +3,6 @@ package com.vasylenkomaksym.guesswhat.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,15 +68,6 @@ public class SetPlayersFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                for (int i = 0; i < playersAdapter.getCount(); i++) {
-                    //Log.e("adapter item " + i, String.valueOf(playersAdapter.getData(i)));
-                    //dataProvider.addPlayer(String.valueOf(playersAdapter.getData(i)));
-                }
-
-                for (int i = 0; i < dataProvider.getPlayers().size(); i++) {
-                    Log.e("adapter item " + i, dataProvider.getPlayer(i));
-                }
 
                 int wordsCount = Integer.valueOf(String.valueOf(numberOfWords.getText()));
                 dataProvider.setWordsPerPlayer(wordsCount);

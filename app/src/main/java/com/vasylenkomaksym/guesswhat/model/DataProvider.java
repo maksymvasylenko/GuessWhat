@@ -1,7 +1,6 @@
 package com.vasylenkomaksym.guesswhat.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +47,6 @@ public class DataProvider {
         if(instance == null){
             instance = new DataProvider();
         }
-        Log.d("dp", "data provider created");
         return instance;
     }
 
@@ -79,9 +76,6 @@ public class DataProvider {
         return wordsPerPlayer;
     }
 
-    public ArrayList<String> getWords() {
-        return this.words;
-    }
 
     public String getWord(int wordId){
         return this.words.get(wordId);
@@ -89,12 +83,6 @@ public class DataProvider {
 
     public void addArrayOfWords(ArrayList<String> words) {
         this.words.addAll(words);
-    }
-
-
-
-    public void addWord(String word){
-        this.words.add(word);
     }
 
 
@@ -111,9 +99,6 @@ public class DataProvider {
         this.availableWords.remove(wordId);
     }
 
-    public int getSkippedSize(){
-        return this.skippedWords.size();
-    }
 
     public void moveAllSkippedIntoAvailable(){
         this.availableWords.addAll(skippedWords);
@@ -128,9 +113,6 @@ public class DataProvider {
         }
     }
 
-    public void setRound(int round) {
-        this.round = round;
-    }
 
     public int getRound() {
         return this.round;
@@ -171,13 +153,6 @@ public class DataProvider {
         return this.players.get(playerId);
     }
 
-    public void setPlayers(ArrayList<String> players) {
-        this.players = players;
-        for (int i = 0; i < players.size(); i++) {
-            this.points.add(0);
-        }
-    }
-
     public void addPlayer(String name){
         players.add(name);
     }
@@ -188,9 +163,6 @@ public class DataProvider {
         this.points.set(plyerId, (this.points.get(plyerId) + points));
     }
 
-    public ArrayList<Integer> getPoints(){
-        return this.points;
-    }
 
     public void addPoint(int point){
         this.points.add(point);
@@ -242,7 +214,7 @@ public class DataProvider {
 
     public void readFromFile(Context context) {
 
-        String ret = "";
+        String ret;
 
         try {
             InputStream inputStream = context.openFileInput(FILE_NAME);
@@ -250,7 +222,7 @@ public class DataProvider {
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString;
                 StringBuilder stringBuilder = new StringBuilder();
 
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
@@ -263,11 +235,7 @@ public class DataProvider {
                 fromJson(ret);
 
             }
-        }
-        catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
         }
     }
 

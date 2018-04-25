@@ -22,8 +22,6 @@ import java.io.File;
 
 public class WinnerFragment extends Fragment{
 
-    private DataProvider dataProvider = null;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class WinnerFragment extends Fragment{
         File file = new File(getContext().getFilesDir(),DataProvider.FILE_NAME);
         file.delete();
 
-        dataProvider = DataProvider.getInstance();
+        DataProvider dataProvider = DataProvider.getInstance();
 
         String winner = dataProvider.getWinner();
         TextView winnerTextView = view.findViewById(R.id.tv_winner);

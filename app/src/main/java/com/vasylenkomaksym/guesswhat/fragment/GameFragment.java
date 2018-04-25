@@ -3,7 +3,6 @@ package com.vasylenkomaksym.guesswhat.fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GameFragment extends Fragment {
 
-    private TextView currentWordTextView, countDownTextView;
+    private TextView countDownTextView;
     private DataProvider dataProvider = null;
     private int currentWordId = -1;
     private int currentPlayerId = -1;
@@ -27,7 +26,6 @@ public class GameFragment extends Fragment {
     private CountDownTimer countDownTimer;
 
     private SwipeDeck cardStack;
-    private ArrayList<String> testData;
     private SwipeDeckAdapter adapter;
     private ScoreFragment scoreFragment = new ScoreFragment();
 
@@ -63,7 +61,7 @@ public class GameFragment extends Fragment {
     }
 
     private void initCardStackViews(View view) {
-        cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
+        cardStack = view.findViewById(R.id.swipe_deck);
         cardStack.setLeftImage(R.id.left_image);
         cardStack.setRightImage(R.id.right_image);
     }
@@ -133,31 +131,12 @@ public class GameFragment extends Fragment {
     }
 
     public void delayNextWord(){
-        CountDownTimer wait = new CountDownTimer(500, 500) {
+        new CountDownTimer(500, 500) {
             public void onTick(long millisUntilFinished) {}
             public void onFinish() {
                 nextWord();
             }
 
         }.start();
-    }
-
-    private void logDataProvider(){
-        Log.e("Provider Contais", " start");
-        Log.e("Provider ", " Players");
-        for (int i = 0; i < dataProvider.getPlayers().size(); i++) {
-            Log.e("Provider: Player " + i, " " + dataProvider.getPlayers().get(i));
-        }
-
-        Log.e("Provider: Round", "" + dataProvider.getRound());
-        Log.e("Provider: Turn", "" + dataProvider.getTurn());
-        Log.e("Provider: Available", "" + dataProvider.getAvailableWords().size());
-        Log.e("Provider: Skiped", "" + dataProvider.getSkippedSize());
-        Log.e("Provider: Total Words", "" + dataProvider.getWords().size());
-
-        Log.e("Provider ", " Score");
-        for (int i = 0; i < dataProvider.getPoints().size(); i++) {
-            Log.e("Provider: Player" + i, " " + dataProvider.getPoint(i));
-        }
     }
 }

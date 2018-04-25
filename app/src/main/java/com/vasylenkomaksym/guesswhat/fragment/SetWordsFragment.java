@@ -3,7 +3,6 @@ package com.vasylenkomaksym.guesswhat.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,6 @@ public class SetWordsFragment extends Fragment {
 
         final Fragment scoreFragment = new ScoreFragment();
 
-        Log.e("SetWords", "seting words started");
 
         wordsOfPlayer.clear();
         for (int i = 0; i < dataProvider.getWordsPerPlayer(); i++) {
@@ -54,10 +52,6 @@ public class SetWordsFragment extends Fragment {
 
                 counter++;
                 if(counter >= dataProvider.getPlayers().size()){
-                    for (int i = 0; i < dataProvider.getWords().size(); i++) {
-
-                        Log.e("adapter item word:" + i, String.valueOf(dataProvider.getWords().get(i)));
-                    }
 
                     counter = 0;
                     getActivity().getSupportFragmentManager().beginTransaction()

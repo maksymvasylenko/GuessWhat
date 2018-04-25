@@ -47,7 +47,7 @@ public class EditPlayerAdapter extends BaseAdapter {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.player_list_item, null);
             holder.deleteBtn = view.findViewById(R.id.btn_delete);
-            holder.text = (EditText) view.findViewById(R.id.et_name);
+            holder.text =  view.findViewById(R.id.et_name);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();

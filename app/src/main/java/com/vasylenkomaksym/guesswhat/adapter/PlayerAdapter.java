@@ -37,8 +37,8 @@ public class PlayerAdapter extends ArrayAdapter<String> {
         }
 
         // Defining textViews and filling with data
-        TextView tvPlayerName = (TextView) convertView.findViewById(R.id.tv_player);
-        TextView tvPlayerScore = (TextView) convertView.findViewById(R.id.tv_score);
+        TextView tvPlayerName = convertView.findViewById(R.id.tv_player);
+        TextView tvPlayerScore = convertView.findViewById(R.id.tv_score);
         tvPlayerScore.setText(Integer.toString(dataProvider.getPoint(position)));
         tvPlayerName.setText(dataProvider.getPlayer(position));
 
