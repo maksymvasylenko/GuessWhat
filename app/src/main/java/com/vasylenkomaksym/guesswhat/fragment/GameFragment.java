@@ -17,170 +17,129 @@ import com.vasylenkomaksym.guesswhat.model.DataProvider;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Created by Maks on 16.12.2017.
- */
-
 public class GameFragment extends Fragment {
 
     private TextView currentWordTextView, countDownTextView;
     private DataProvider dataProvider = null;
     private int currentWordId = -1;
     private int currentPlayerId = -1;
-    private int eearnedPoints = 0;
+    private int points = 0;
     private CountDownTimer countDownTimer;
 
-    /*
-    Swipe deck
-     */
     private SwipeDeck cardStack;
     private ArrayList<String> testData;
     private SwipeDeckAdapter adapter;
-    /*
-    Swipe deck
-     */
+    private ScoreFragment scoreFragment = new ScoreFragment();
 
+    static final int MIL_DELAY = 60000;
+    static final int MIL_INTERVAL = 1000;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
+        initDataProvider();
+        initCardStack(view);
+        initCountDown(view);
+        delayNextWord();
+        return view;
+    }
 
-        final Fragment scoreFragment = new ScoreFragment();
+    private void initDataProvider() {
+        dataProvider = DataProvider.getInstance();
+        currentPlayerId = dataProvider.getTurn();
+    }
 
-        /*
-        Swipe deck
-         */
-        cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
+    private void initCardStack(View view) {
+        initCardStackViews(view);
+        initCardStackAdapter();
+        initCardSwipeCallbacks();
+    }
 
-        testData = new ArrayList<>();
-//        testData.add("word");
-
-        adapter = new SwipeDeckAdapter(testData, this.getContext());
+    private void initCardStackAdapter() {
+        adapter = new SwipeDeckAdapter(new ArrayList<String>(), this.getContext());
         if(cardStack != null){
             cardStack.setAdapter(adapter);
         }
+    }
 
+    private void initCardStackViews(View view) {
+        cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
+        cardStack.setLeftImage(R.id.left_image);
+        cardStack.setRightImage(R.id.right_image);
+    }
+
+    private void initCountDown(View view) {
+        countDownTextView = view.findViewById(R.id.tv_count_down);
+        countDownTimer = new CountDownTimer(MIL_DELAY, MIL_INTERVAL) {
+            public void onTick(long millisUntilFinished) {
+                countDownTextView.setText(Integer.toString((int) (millisUntilFinished / 1000)));
+            }
+            public void onFinish() {
+                dataProvider.addPoints(currentPlayerId, points);
+                dataProvider.nextTurn();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
+            }
+        }.start();
+    }
+
+    private void initCardSwipeCallbacks() {
         cardStack.setCallback(new SwipeDeck.SwipeDeckCallback() {
             @Override
             public void cardSwipedLeft(long stableId) {
-                Log.i("MainActivity", "card was swiped left, position in adapter: " + stableId);
-                // TODO: 4/23/18 implement this
-//                addWord("wtf");
                 dataProvider.moveFromAvailableToSkipped(currentWordId);
-                nextWord();
+                delayNextWord();
             }
 
             @Override
             public void cardSwipedRight(long stableId) {
-                Log.i("MainActivity", "card was swiped right, position in adapter: " + stableId);
-                // TODO: 4/23/18 implement this
-//                addWord("wtffff");
-
                 dataProvider.removeFromAvailable(currentWordId);
-                eearnedPoints++;
-
-                if(!nextWord()){
-
-                    dataProvider.addPoints(currentPlayerId, eearnedPoints);
-                    dataProvider.nextRound();
-                    countDownTimer.cancel();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
-
+                points++;
+                if(!dataProvider.hasAvailableWords()){
+                    finishRound();
+                } else {
+                    delayNextWord();
                 }
             }
         });
+    }
 
-        cardStack.setLeftImage(R.id.left_image);
-        cardStack.setRightImage(R.id.right_image);
-        /*
-        End swipe deck
-         */
-
-//        currentWordTextView = view.findViewById(R.id.tv_word);
-        countDownTextView = view.findViewById(R.id.tv_count_down);
-        dataProvider = DataProvider.getInstance();
-        logDataProvider();
-        currentPlayerId = dataProvider.getTurn();
-
-//        Button skipButton = view.findViewById(R.id.btn_skip);
-//        Button guessedButton = view.findViewById(R.id.btn_guessed);
-
-        nextWord();
-
-//        skipButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dataProvider.moveFromAvailableToSkipped(currentWordId);
-//
-//                logDataProvider();
-//                nextWord();
-//                logDataProvider();
-//            }
-//        });
-
-//        guessedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dataProvider.removeFromAvailable(currentWordId);
-//                eearnedPoints++;
-//
-//                Log.e("just ", "guessed");
-//                logDataProvider();
-//
-//                if(!nextWord()){
-//
-//                    dataProvider.addPoints(currentPlayerId, eearnedPoints);
-//                    dataProvider.nextRound();
-//                    countDownTimer.cancel();
-//                    getActivity().getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
-//
-//                }
-//            }
-//        });
-
-        countDownTimer = new CountDownTimer(60000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                countDownTextView.setText(millisUntilFinished / 1000 + " sec");
-            }
-
-            public void onFinish() {
-//                dataProvider.addPoints(currentPlayerId, eearnedPoints);
-//                dataProvider.nextTurn();
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
-            }
-        }.start();
-
-        return view;
+    void finishRound(){
+        dataProvider.addPoints(currentPlayerId, points);
+        dataProvider.nextRound();
+        countDownTimer.cancel();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
     }
 
     private void addWord(String word){
         adapter.addItem(word);
-        Log.d("hm", word + " added");
-//        cardStack.unSwipeCard();
     }
 
     private boolean nextWord(){
-
-        int size = dataProvider.getAvailableWords().size();
-
-        if(size == 0){
-           dataProvider.moveAllSkippedIntoAvailable();
-           size = dataProvider.getAvailableWords().size();
+        if(!dataProvider.hasAvailableWords()){
+            dataProvider.moveAllSkippedIntoAvailable();
         }
 
-        if(size > 0){
+        if (dataProvider.hasAvailableWords()){
             int i = ThreadLocalRandom.current().nextInt(dataProvider.getAvailableWords().size());
             currentWordId = dataProvider.getAvailableWords().get(i);
             String newWord = dataProvider.getWord(currentWordId);
             addWord(newWord);
             return true;
+        } else {
+            return false;
         }
+    }
 
-        return false;
+    public void delayNextWord(){
+        CountDownTimer wait = new CountDownTimer(500, 500) {
+            public void onTick(long millisUntilFinished) {}
+            public void onFinish() {
+                nextWord();
+            }
+
+        }.start();
     }
 
     private void logDataProvider(){
@@ -201,7 +160,4 @@ public class GameFragment extends Fragment {
             Log.e("Provider: Player" + i, " " + dataProvider.getPoint(i));
         }
     }
-
-
-
 }

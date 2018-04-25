@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -50,6 +49,7 @@ public class DataProvider {
         if(instance == null){
             instance = new DataProvider();
         }
+        Log.d("dp", "data provider created");
         return instance;
     }
 
@@ -83,7 +83,6 @@ public class DataProvider {
     }
 
 
-
     public ArrayList<Integer> getAvailableWords(){
         return this.availableWords;
     }
@@ -113,10 +112,6 @@ public class DataProvider {
             this.availableWords.add(i);
         }
     }
-
-
-
-
 
     public void setRound(int round) {
         this.round = round;
@@ -340,5 +335,7 @@ public class DataProvider {
 
     }
 
-
+    public boolean hasAvailableWords() {
+        return availableWords.size() > 0;
+    }
 }
