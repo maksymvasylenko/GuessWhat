@@ -58,6 +58,19 @@ public class DataProvider {
         return instance;
     }
 
+    public void restartGame(){
+        this.words = new ArrayList<>();
+        this.isNewRound = true;
+        this.skippedWords = new ArrayList<>();
+        this.availableWords = new ArrayList<>();
+        points = new ArrayList<>();
+        for(String player : this.players){
+            points.add(0);
+        }
+        this.round = 0;
+        this.turn = 0;
+    }
+
     public void setWordsPerPlayer(int wordsPerPlayer) {
         this.wordsPerPlayer = wordsPerPlayer;
     }
@@ -77,6 +90,8 @@ public class DataProvider {
     public void addArrayOfWords(ArrayList<String> words) {
         this.words.addAll(words);
     }
+
+
 
     public void addWord(String word){
         this.words.add(word);

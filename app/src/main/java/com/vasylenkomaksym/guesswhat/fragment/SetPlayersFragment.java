@@ -38,12 +38,16 @@ public class SetPlayersFragment extends Fragment {
         Button addPlayer = view.findViewById(R.id.btn_add_player);
         final EditText numberOfWords = view.findViewById(R.id.et_number_of_words);
 
+        //if 0 than it is a new game. otherwise its restarted game
         if(dataProvider.getPlayers().size() == 0){
             dataProvider.addPlayer("Player 1");
             dataProvider.addPlayer("Player 2");
 
             dataProvider.addPoint(0);
             dataProvider.addPoint(0);
+        }else{
+            numberOfWords.setText("" + dataProvider.getWordsPerPlayer());
+            dataProvider.restartGame();
         }
 
 

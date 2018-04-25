@@ -59,6 +59,7 @@ public class SetWordsFragment extends Fragment {
                         Log.e("adapter item word:" + i, String.valueOf(dataProvider.getWords().get(i)));
                     }
 
+                    counter = 0;
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, scoreFragment).addToBackStack(null).commit();
                 }else{
